@@ -1,0 +1,30 @@
+Design an algorithm to encode a list of strings to a string. The encoded string is then sent over
+the network and is decoded back to the original list of strings.
+
+class Solution {
+
+    public String encode(List<String> strs) {
+StringBuilder sb = new StringBuilder();
+for(String str:strs){
+    int len=str.length(); 
+sb.append(len);
+sb.append("#");
+sb.append(str);
+}
+return sb.toString();
+    }
+
+    public List<String> decode(String str) {
+ List<String> ans = new ArrayList<>();
+ int i=0;
+  while (i < str.length()) {
+int j = str.indexOf('#', i);
+String len = str.substring(i, j);
+int length = Integer.parseInt(len);
+String word = str.substring(j + 1, j + 1 + length); 
+    ans.add(word);
+i = j + 1 + length;
+   }
+    return ans;
+    }
+}
